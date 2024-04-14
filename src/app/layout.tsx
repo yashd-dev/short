@@ -27,7 +27,7 @@ export default function RootLayout({
 		>
 			<html lang="en">
 				<body
-					className={`${inter.className} bg-background text-text w-full min-h-screen px-3`}
+					className={`${inter.className} bg-background text-text w-full min-h-screen px-3 md:px-0`}
 				>
 					{children}
 				</body>

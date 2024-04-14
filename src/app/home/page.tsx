@@ -22,7 +22,7 @@ export default function Home() {
 					Welcome to Short, A URL Shortner
 				</h1>
 				<p className="mt-6 text-lg leading-8 text-subtle max-w-xl">
-					URL`&apos`s are too long, we`&apos`ll make it short. This
+					URL&apos;s are too long, we &apos;ll make it short. This
 					site is desigined to be self hosted on your domain. I
 					provide Docker Image and Code for you to deploy on your own
 				</p>
