@@ -1,8 +1,9 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+export const runtime = "experimental-edge";
 export default authMiddleware({
-	publicRoutes: ["/", "/home", "/api"],
+	publicRoutes: ["/", "/home", "/api/webhooks(.*)"],
 	ignoredRoutes: ["/favicon.ico"],
 	afterAuth(auth, req, evt) {
 		// Handle users who aren't authenticated

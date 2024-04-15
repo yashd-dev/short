@@ -1,14 +1,17 @@
 import AuthNavbar from "@/compnents/auth-nav";
 import { tursoClient } from "@/lib/turso";
+import { currentUser } from "@clerk/nextjs";
 
+export const runtime = "edge";
 export interface URL {
+	id: string;
 	url: string;
 	title: string;
 }
 
 async function getData() {
 	try {
-		const res = await tursoClient().execute("select * from urls;");
+		const res = await tursoClient().execute("select * from url;");
 		return {
 			urls: res.rows as unknown as URL[],
 		};
@@ -22,6 +25,10 @@ async function getData() {
 
 export default async function Link() {
 	const { urls } = await getData();
+	const user = await currentUser();
+	console.log(urls);
+	const filteredUrls = urls.filter((url) => url.id === user?.id);
+
 	return (
 		<div>
 			<AuthNavbar></AuthNavbar>
@@ -42,7 +49,7 @@ export default async function Link() {
 						</tr>
 					</thead>
 					<tbody>
-						{urls.map((url, index) => (
+						{filteredUrls.map((url, index) => (
 							<tr
 								key={index}
 								className={index % 2 === 0 ? "bg-gray-100" : ""}
@@ -52,6 +59,7 @@ export default async function Link() {
 									{url.title}
 									<a
 										href={`${process.env.NEXT_PRODUCTION_URL}/${url.title}`}
+										target="_blank"
 									>
 										🔗
 									</a>

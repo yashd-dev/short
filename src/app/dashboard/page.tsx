@@ -1,6 +1,10 @@
 import { auth, clerkClient } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import AuthNavbar from "@/compnents/auth-nav";
+import { currentUser } from "@clerk/nextjs";
+
+export const runtime = "edge";
+
 export default async function Page(request: { searchParams: any }) {
 	const { error, message } = request.searchParams;
 	const { userId } = auth();
@@ -10,7 +14,8 @@ export default async function Page(request: { searchParams: any }) {
 	}
 
 	const user = await clerkClient.users.getUser(userId);
-
+	const user2 = await currentUser();
+	console.log(user2?.id);
 	return (
 		<div>
 			<AuthNavbar></AuthNavbar>

@@ -1,5 +1,7 @@
 import { tursoClient } from "@/lib/turso";
 import { redirect } from "next/navigation";
+
+export const runtime = "edge";
 export interface URL {
 	url: string;
 	title: string;
@@ -7,7 +9,7 @@ export interface URL {
 
 async function getData() {
 	try {
-		const res = await tursoClient().execute("select * from urls;");
+		const res = await tursoClient().execute("select * from url;");
 		return {
 			urls: res.rows as unknown as URL[],
 		};

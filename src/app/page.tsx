@@ -1,6 +1,9 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Navbar from "@/compnents/nav";
+
+export const runtime = "edge";
+
 export default function Home() {
 	const { userId } = auth();
 
